@@ -65,13 +65,14 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
   });
 
   //console.log("RegistrationForm2.tsx: formData initialized with:", formData);
-  const searchParams = useSearchParams();
+//   const searchParams = useSearchParams();
   //const tokenFromUrl = searchParams.get("token");
   const tokenFromUrl = null
   //const [token, setToken] = useState<string | null>(tokenFromUrl);
-  const emailFromUrl = searchParams.get("email");
-  const [UrlEmail, setUrlEmail] = useState<string | null>(emailFromUrl);
+//   const emailFromUrl = searchParams.get("email");
+//   const [UrlEmail, setUrlEmail] = useState<string | null>(emailFromUrl);
 
+  // Depreciated
   useEffect(() => {
     if (tokenFromUrl) {
       fetch(`/api/register/lookup?token=${tokenFromUrl}`)
