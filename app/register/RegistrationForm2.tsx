@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type Props = {
-    initialData?: any;
+    initialData?: string[] | null;
     onClose?: () => void;
   };
 

@@ -12,7 +12,7 @@ type Props = {
 export default function RegistrationLookupModal({ open, onClose }: Props) {
   const [email, setEmail] = useState("");
   const [lookupState, setLookupState] = useState<"form" | "loading" | "found" | "not-found">("form");
-  const [prefillData, setPrefillData] = useState<any>(null);
+  const [prefillData, setPrefillData] = useState<string[] | null>(null);
 
   const modalRef = useRef<HTMLDivElement>(null);
 
