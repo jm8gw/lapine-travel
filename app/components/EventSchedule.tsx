@@ -86,7 +86,7 @@ export default function EventSchedule() {
           <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-4">
             Event Schedule
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-4xl mx-auto">
             Four days of business meetings, networking, and memorable
             experiences in beautiful Puerto Rico
           </p>
