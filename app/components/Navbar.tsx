@@ -10,9 +10,9 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="https://3dhkilcjv5pd.manussite.space/" className="flex items-center">
+            <Link href="https://lapine-travel.vercel.app/" className="flex items-center">
               <Image
-                src="/assets/fontaine-travel-logo-Db8JY4q0.png"
+                src="/assets/fontaine_travel_logo-hzdd6S0q.png"
                 alt="Fontaine Travel"
                 width={120}
                 height={40}
@@ -42,7 +42,7 @@ export default function Navbar() {
           {/* CTA Button */}
           <div className="flex items-center">
             <Link
-              href="https://3dhkilcjv5pd.manussite.space/"
+              href="https://lapine-travel.vercel.app/"
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
             >
               Register for the Meeting

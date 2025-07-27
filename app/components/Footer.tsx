@@ -14,7 +14,7 @@ export default function Footer() {
                   <img
                     alt="Fontaine Travel"
                     className="h-8"
-                    src="/assets/fontaine-travel-logo-Db8JY4q0.png"
+                    src="/assets/fontaine_travel_logo-hzdd6S0q.png"
                   />
                 </div>
               </div>

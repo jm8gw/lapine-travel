@@ -20,7 +20,7 @@ export default function Hero() {
       className="relative h-[60vh] flex items-center justify-center text-center text-white top-10"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/tropical-background-DAm-Ulgb.jpg')",
+          "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/sonesta_pool_hero-Bh9uOX9P.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center center",
       }}
