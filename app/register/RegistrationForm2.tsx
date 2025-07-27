@@ -253,7 +253,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 value={formData.attendeeName}
                 onChange={handleChange}
                 required
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm placeholder-gray-400 text-gray-700"
               />
             </div>
             <div>
@@ -269,7 +269,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 placeholder="Guest Name"
                 value={formData.guestName}
                 onChange={handleChange}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm placeholder-gray-400 text-gray-700"
               />
             </div>
             <div>
@@ -287,7 +287,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm placeholder-gray-400 text-gray-700"
               />
             </div>
             <div>
@@ -305,7 +305,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm placeholder-gray-400 text-gray-700"
               />
             </div>
             {/* Depreciated -- no longer recording tshirt sizes */}
@@ -354,9 +354,9 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
               className="lucide lucide-plane h-5 w-5 text-blue-600"
               aria-hidden="true"
             >
@@ -408,7 +408,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   placeholder="e.g., American Airlines, Delta, JetBlue"
                   value={formData.arrivalAirline}
                   onChange={handleChange}
-                  className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placeholder-gray-400"
+                  className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
                 />
               </div>
               <div>
@@ -424,7 +424,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   placeholder="e.g., AA1234, DL567"
                   value={formData.arrivalFlightNumber}
                   onChange={handleChange}
-                  className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placeholder-gray-400"
+                  className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
                 />
               </div>
               <div>
@@ -483,7 +483,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   placeholder="e.g., American Airlines, Delta, JetBlue"
                   value={formData.departureAirline}
                   onChange={handleChange}
-                  className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placeholder-gray-400"
+                  className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
                 />
               </div>
               <div>
@@ -499,7 +499,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   placeholder="e.g., AA1234, DL567"
                   value={formData.departureFlightNumber}
                   onChange={handleChange}
-                  className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placeholder-gray-400"
+                  className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
                 />
               </div>
               <div>
@@ -532,7 +532,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   placeholder="e.g., JFK, LAX, MIA"
                   value={formData.departureAirport}
                   onChange={handleChange}
-                  className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placeholder-gray-400"
+                  className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
                 />
               </div>
             </div>
@@ -638,9 +638,9 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
               className="lucide lucide-utensils h-5 w-5 text-blue-600"
               aria-hidden="true"
             >
@@ -666,7 +666,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 placeholder="Please list any food allergies or dietary restrictions..."
                 value={formData.foodAllergies}
                 onChange={handleChange}
-                className="mt-1 w-full min-h-16 rounded-md border border-gray-300 bg-transparent px-3 py-2 text-base shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
+                className="mt-1 w-full min-h-16 rounded-md border border-gray-300 bg-transparent px-3 py-2 text-base shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-gray-700"
               />
             </div>
 
@@ -683,7 +683,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 placeholder="Please describe any mobility issues or accessibility requirements..."
                 value={formData.mobilityIssues}
                 onChange={handleChange}
-                className="mt-1 w-full min-h-16 rounded-md border border-gray-300 bg-transparent px-3 py-2 text-base shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
+                className="mt-1 w-full min-h-16 rounded-md border border-gray-300 bg-transparent px-3 py-2 text-base shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-gray-700"
               />
             </div>
           </div>
@@ -701,9 +701,9 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
               className="lucide lucide-message-square h-5 w-5 text-blue-600"
               aria-hidden="true"
             >
@@ -726,7 +726,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
               placeholder="Please share any additional information or special requests..."
               value={formData.additionalNotes}
               onChange={handleChange}
-              className="mt-1 w-full min-h-16 rounded-md border border-gray-300 bg-transparent px-3 py-2 text-base shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
+              className="mt-1 w-full min-h-16 rounded-md border border-gray-300 bg-transparent px-3 py-2 text-base shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-gray-700"
             />
           </div>
         </div>
