@@ -1,3 +1,5 @@
+// DEPRECIATED! DO NOT USE!
+
 'use client';
 
 import { useState } from 'react';

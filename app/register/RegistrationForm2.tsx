@@ -14,31 +14,31 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     guestName: initialData?.[3] || "",
     email: initialData?.[1] || "",
     phone: initialData?.[4] || "",
-    attendeeTshirtSize: initialData?.[5] || "",
-    guestTshirtSize: initialData?.[6] || "",
-    arrivalDate: initialData?.[7] || "",
-    arrivalAirline: initialData?.[8] || "",
-    arrivalFlightNumber: initialData?.[9] || "",
-    arrivalTime: initialData?.[10] || "",
-    departureDate: initialData?.[11] || "",
-    departureAirline: initialData?.[12] || "",
-    departureFlightNumber: initialData?.[13] || "",
-    departureTime: initialData?.[14] || "",
-    departureAirport: initialData?.[15] || "",
-    roomType: initialData?.[16] || "",
-    checkInDate: initialData?.[17] || "",
-    checkOutDate: initialData?.[18] || "",
+    //attendeeTshirtSize: initialData?.[5] || "",
+    //guestTshirtSize: initialData?.[6] || "",
+    arrivalDate: initialData?.[5] || "",
+    arrivalAirline: initialData?.[6] || "",
+    arrivalFlightNumber: initialData?.[7] || "",
+    arrivalTime: initialData?.[8] || "",
+    departureDate: initialData?.[9] || "",
+    departureAirline: initialData?.[10] || "",
+    departureFlightNumber: initialData?.[11] || "",
+    departureTime: initialData?.[12] || "",
+    departureAirport: initialData?.[13] || "",
+    roomType: initialData?.[14] || "",
+    checkInDate: initialData?.[15] || "",
+    checkOutDate: initialData?.[16] || "",
     eventAttendance: {
-      fridayDinnerAttendee: initialData?.[19]?.includes("fridayDinnerAttendee") || false,
-      fridayDinnerGuest: initialData?.[19]?.includes("fridayDinnerGuest") || false,
-      saturdayScavengerAttendee: initialData?.[19]?.includes("saturdayScavengerAttendee") || false,
-      saturdayScavengerGuest: initialData?.[19]?.includes("saturdayScavengerGuest") || false,
-      saturdayDinnerAttendee: initialData?.[19]?.includes("saturdayDinnerAttendee") || false,
-      saturdayDinnerGuest: initialData?.[19]?.includes("saturdayDinnerGuest") || false,
+      fridayDinnerAttendee: initialData?.[17]?.includes("fridayDinnerAttendee") || false,
+      fridayDinnerGuest: initialData?.[17]?.includes("fridayDinnerGuest") || false,
+      saturdayScavengerAttendee: initialData?.[17]?.includes("saturdayScavengerAttendee") || false,
+      saturdayScavengerGuest: initialData?.[17]?.includes("saturdayScavengerGuest") || false,
+      saturdayDinnerAttendee: initialData?.[17]?.includes("saturdayDinnerAttendee") || false,
+      saturdayDinnerGuest: initialData?.[17]?.includes("saturdayDinnerGuest") || false,
     },
-    foodAllergies: initialData?.[20] || "",
-    mobilityIssues: initialData?.[21] || "",
-    additionalNotes: initialData?.[22] || "",
+    foodAllergies: initialData?.[18] || "",
+    mobilityIssues: initialData?.[19] || "",
+    additionalNotes: initialData?.[20] || "",
     // Old ones commented out for reference
     // arrivalFlightNumber: "",
     // arrivalTime: "",
@@ -61,7 +61,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     // foodAllergies: "",
     // mobilityIssues: "",
     // additionalNotes: "",
-    token: initialData?.[23] || "", // Will be set later from URL or backend lookup
+    token: initialData?.[21] || "", // Will be set later from URL or backend lookup
   });
 
   //console.log("RegistrationForm2.tsx: formData initialized with:", formData);
@@ -129,25 +129,25 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
       guestName: row[3] || "",
       email: row[1] || "",
       phone: row[4] || "",
-      attendeeTshirtSize: row[5] || "",
-      guestTshirtSize: row[6] || "",
-      arrivalDate: row[7] || "",
-      arrivalAirline: row[8] || "",
-      arrivalFlightNumber: row[9] || "",
-      arrivalTime: row[10] || "",
-      departureDate: row[11] || "",
-      departureAirline: row[12] || "",
-      departureFlightNumber: row[13] || "",
-      departureTime: row[14] || "",
-      departureAirport: row[15] || "",
-      roomType: row[16] || "",
-      checkInDate: row[17] || "",
-      checkOutDate: row[18] || "",
-      eventAttendance: parseEventAttendance(row[19] || ""),
-      foodAllergies: row[20] || "",
-      mobilityIssues: row[21] || "",
-      additionalNotes: row[22] || "",
-      token: row[23] || "", // Ensure token is included
+      //attendeeTshirtSize: row[5] || "",
+      //guestTshirtSize: row[6] || "",
+      arrivalDate: row[5] || "",
+      arrivalAirline: row[6] || "",
+      arrivalFlightNumber: row[7] || "",
+      arrivalTime: row[8] || "",
+      departureDate: row[9] || "",
+      departureAirline: row[10] || "",
+      departureFlightNumber: row[11] || "",
+      departureTime: row[12] || "",
+      departureAirport: row[13] || "",
+      roomType: row[14] || "",
+      checkInDate: row[15] || "",
+      checkOutDate: row[16] || "",
+      eventAttendance: parseEventAttendance(row[17] || ""),
+      foodAllergies: row[18] || "",
+      mobilityIssues: row[19] || "",
+      additionalNotes: row[20] || "",
+      token: row[21] || "", // Ensure token is included
     };
   }
 
@@ -230,40 +230,77 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
         <h3 className="text-xl font-semibold text-gray-900">Personal Information</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            name="attendeeName"
-            placeholder="Attendee Name"
-            value={formData.attendeeName}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 text-gray-900 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            name="guestName"
-            placeholder="Guest Name"
-            value={formData.guestName}
-            onChange={handleChange}
-            className="border border-gray-300 text-gray-900 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 text-gray-900 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            name="phone"
-            type="tel"
-            placeholder="Cell Phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 text-gray-900 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <select
+					<div>
+						<label
+							data-slot="label"
+							className="flex text-sm font-medium text-gray-700"
+							htmlFor="attendeeName"
+						>
+							Attendee Name *
+						</label>
+						<input
+							name="attendeeName"
+							placeholder="Attendee Name"
+							value={formData.attendeeName}
+							onChange={handleChange}
+							required
+							className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+						/>
+					</div>
+					<div>
+						<label
+							data-slot="label"
+							className="flex text-sm font-medium text-gray-700"
+							htmlFor="guestName"
+						>
+							Guest Name
+						</label>
+						<input
+							name="guestName"
+							placeholder="Guest Name"
+							value={formData.guestName}
+							onChange={handleChange}
+							className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+						/>
+					</div>
+					<div>
+						<label
+							data-slot="label"
+							className="flex text-sm font-medium text-gray-700"
+							htmlFor="email"
+						>
+							Email Address *
+						</label>
+						<input
+							name="email"
+							type="email"
+							placeholder="Email"
+							value={formData.email}
+							onChange={handleChange}
+							required
+							className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+						/>
+					</div>
+					<div>
+						<label
+							data-slot="label"
+							className="flex text-sm font-medium text-gray-700"
+							htmlFor="phone"
+						>
+							Cell Phone Number *
+						</label>
+						<input
+							name="phone"
+							type="tel"
+							placeholder="Cell Phone"
+							value={formData.phone}
+							onChange={handleChange}
+							required
+							className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+						/>
+					</div>
+					{/* Depreciated -- no longer recording tshirt sizes */}
+          {/* <select
             name="attendeeTshirtSize"
             value={formData.attendeeTshirtSize}
             onChange={handleChange}
@@ -292,7 +329,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
             <option value="XL">XL</option>
             <option value="XXL">XXL</option>
             <option value="XXXL">XXXL</option>
-          </select>
+          </select> */}
         </div>
       </section>
 
