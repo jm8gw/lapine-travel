@@ -26,25 +26,26 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     departureTime: initialData?.[12] || "",
     departureAirport: initialData?.[13] || "",
     roomType: initialData?.[14] || "",
-    checkInDate: initialData?.[15] || "",
-    checkOutDate: initialData?.[16] || "",
+    oceanView: initialData?.[15] || "",
+    checkInDate: initialData?.[16] || "",
+    checkOutDate: initialData?.[17] || "",
     eventAttendance: {
       fridayDinnerAttendee:
-        initialData?.[17]?.includes("fridayDinnerAttendee") || false,
+        initialData?.[18]?.includes("fridayDinnerAttendee") || false,
       fridayDinnerGuest:
-        initialData?.[17]?.includes("fridayDinnerGuest") || false,
+        initialData?.[18]?.includes("fridayDinnerGuest") || false,
       saturdayScavengerAttendee:
-        initialData?.[17]?.includes("saturdayScavengerAttendee") || false,
+        initialData?.[18]?.includes("saturdayScavengerAttendee") || false,
       saturdayScavengerGuest:
-        initialData?.[17]?.includes("saturdayScavengerGuest") || false,
+        initialData?.[18]?.includes("saturdayScavengerGuest") || false,
       saturdayDinnerAttendee:
-        initialData?.[17]?.includes("saturdayDinnerAttendee") || false,
+        initialData?.[18]?.includes("saturdayDinnerAttendee") || false,
       saturdayDinnerGuest:
-        initialData?.[17]?.includes("saturdayDinnerGuest") || false,
+        initialData?.[18]?.includes("saturdayDinnerGuest") || false,
     },
-    foodAllergies: initialData?.[18] || "",
-    mobilityIssues: initialData?.[19] || "",
-    additionalNotes: initialData?.[20] || "",
+    foodAllergies: initialData?.[19] || "",
+    mobilityIssues: initialData?.[20] || "",
+    additionalNotes: initialData?.[21] || "",
     // Old ones commented out for reference
     // arrivalFlightNumber: "",
     // arrivalTime: "",
@@ -67,7 +68,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     // foodAllergies: "",
     // mobilityIssues: "",
     // additionalNotes: "",
-    token: initialData?.[21] || "", // Will be set later from URL or backend lookup
+    token: initialData?.[22] || "", // Will be set later from URL or backend lookup
   });
 
   //console.log("RegistrationForm2.tsx: formData initialized with:", formData);
@@ -147,13 +148,14 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
       departureTime: row[12] || "",
       departureAirport: row[13] || "",
       roomType: row[14] || "",
-      checkInDate: row[15] || "",
-      checkOutDate: row[16] || "",
-      eventAttendance: parseEventAttendance(row[17] || ""),
-      foodAllergies: row[18] || "",
-      mobilityIssues: row[19] || "",
-      additionalNotes: row[20] || "",
-      token: row[21] || "", // Ensure token is included
+      oceanView: row[15] || "",
+      checkInDate: row[16] || "",
+      checkOutDate: row[17] || "",
+      eventAttendance: parseEventAttendance(row[18] || ""),
+      foodAllergies: row[19] || "",
+      mobilityIssues: row[20] || "",
+      additionalNotes: row[21] || "",
+      token: row[22] || "", // Ensure token is included
     };
   }
 
@@ -354,9 +356,9 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="lucide lucide-plane h-5 w-5 text-blue-600"
               aria-hidden="true"
             >
@@ -542,88 +544,199 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
 
       {/* Accommodation Preferences */}
       <section>
-        <h2 className="text-xl font-semibold text-gray-800 border-b pb-1 mb-4">
-          Accommodation Preferences
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <select
-            name="roomType"
-            value={formData.roomType}
-            onChange={handleChange}
-            className="border border-gray-300 text-gray-900 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">Select Room Type</option>
-            <option value="2 beds">2 beds</option>
-            <option value="King">King</option>
-            <option value="Suite">Suite</option>
-          </select>
-          <input
-            name="checkInDate"
-            type="date"
-            placeholder="Check-in Date"
-            value={formData.checkInDate}
-            onChange={handleChange}
-            className="border border-gray-300 text-gray-900 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            name="checkOutDate"
-            type="date"
-            placeholder="Check-out Date"
-            value={formData.checkOutDate}
-            onChange={handleChange}
-            className="border border-gray-300 text-gray-900 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <div className="space-y-6 border-t pt-8">
+          <div className="flex items-center space-x-2 mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-calendar h-5 w-5 text-blue-600"
+              aria-hidden="true"
+            >
+              <path d="M8 2v4"></path>
+              <path d="M16 2v4"></path>
+              <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+              <path d="M3 10h18"></path>
+            </svg>
+            <h3 className="text-xl font-semibold text-gray-900">
+              Accomodation Preferences
+            </h3>
+          </div>
+          <p className="text-gray-700 mb-6 text-left text-sm">
+            <li>
+              The Lapine Group will cover a standard hotel room at $329/night
+            </li>
+            <li>For an Ocean View Room, you must pay $60/night</li>
+            <li>
+              If you would like to arrive earlier, or stay extra nights, you
+              will be responsible for the cost
+            </li>
+            <li>
+              If you would like to pay for an upgrade to a suite, put a message
+              in the Additional Notes field below
+            </li>
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label
+                data-slot="label"
+                className="flex text-sm font-medium text-gray-700"
+                htmlFor="roomType"
+              >
+                Room Type
+              </label>
+              <select
+                name="roomType"
+                value={formData.roomType}
+                onChange={handleChange}
+                className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
+              >
+                <option value="">Select Room Type</option>
+                <option value="2 beds">2 beds</option>
+                <option value="King">King</option>
+              </select>
+            </div>
+            <div>
+              <label
+                data-slot="label"
+                className="flex text-sm font-medium text-gray-700"
+                htmlFor="oceanView"
+              >
+                Ocean View?
+              </label>
+              <select
+                name="oceanView"
+                value={formData.oceanView}
+                onChange={handleChange}
+                className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
+              >
+                <option value="2 beds">No</option>
+                <option value="King">Yes</option>
+              </select>
+            </div>
+            <div>
+              <label
+                data-slot="label"
+                className="flex text-sm font-medium text-gray-700"
+                htmlFor="checkInDate"
+              >
+                Check-in Date
+              </label>
+              <input
+                name="checkInDate"
+                type="date"
+                placeholder="mm/dd/yyyy"
+                value={formData.checkInDate}
+                onChange={handleChange}
+                className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
+              />
+            </div>
+            <div>
+              <label
+                data-slot="label"
+                className="flex text-sm font-medium text-gray-700"
+                htmlFor="checkInDate"
+              >
+                Check-out Date
+              </label>
+              <input
+                name="checkOutDate"
+                type="date"
+                placeholder="mm/dd/yyyy"
+                value={formData.checkOutDate}
+                onChange={handleChange}
+                className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Event Attendance */}
       <section>
-        <h2 className="text-xl font-semibold text-gray-800 border-b pb-1 mb-4">
-          Event Attendance
-        </h2>
-        <div className="space-y-6">
-          {[
-            { id: "fridayDinner", label: "Friday Night Dinner" },
-            {
-              id: "saturdayScavenger",
-              label: "Saturday Scavenger Hunt with Lunch",
-            },
-            { id: "saturdayDinner", label: "Saturday Night Dinner" },
-          ].map((event) => (
-            <div key={event.id} className="bg-gray-700 p-4 rounded-md">
-              <h3 className="text-lg font-semibold mb-2">{event.label}</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    name={`${event.id}Attendee`}
-                    checked={
-                      formData.eventAttendance[
-                        `${event.id}Attendee` as keyof typeof formData.eventAttendance
-                      ]
-                    }
-                    onChange={handleCheckbox}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 text-gray-900 rounded"
-                  />
-                  <span>Attendee will attend</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    name={`${event.id}Guest`}
-                    checked={
-                      formData.eventAttendance[
-                        `${event.id}Guest` as keyof typeof formData.eventAttendance
-                      ]
-                    }
-                    onChange={handleCheckbox}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 text-gray-900 rounded"
-                  />
-                  <span>Guest will attend</span>
-                </label>
-              </div>
-            </div>
-          ))}
+        <div className="space-y-6 border-t pt-8">
+          <div className="flex items-center space-x-2 mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-calendar h-5 w-5 text-blue-600"
+              aria-hidden="true"
+            >
+              <path d="M8 2v4"></path>
+              <path d="M16 2v4"></path>
+              <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+              <path d="M3 10h18"></path>
+            </svg>
+            <h3 className="text-xl font-semibold text-gray-900">
+							Event Attendance
+            </h3>
+          </div>
+					<div className="space-y-6">
+						{[
+							{
+								id: "fridayDinner",
+								label: "Friday Night Dinner",
+								bgColor: "bg-blue-50",
+							},
+							{
+								id: "saturdayScavenger",
+								label: "Saturday Scavenger Hunt with Lunch",
+								bgColor: "bg-green-50",
+							},
+							{
+								id: "saturdayDinner",
+								label: "Saturday Night Dinner",
+								bgColor: "bg-purple-50",
+							},
+						].map((event) => (
+							<div key={event.id} className={`${event.bgColor} p-4 rounded-md`}>
+								<h3 className="text-lg text-left text-gray-700 font-semibold mb-2">{event.label}</h3>
+								<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+									<label className="flex items-center space-x-2">
+										<input
+											type="checkbox"
+											name={`${event.id}Attendee`}
+											checked={
+												formData.eventAttendance[
+													`${event.id}Attendee` as keyof typeof formData.eventAttendance
+												]
+											}
+											onChange={handleCheckbox}
+											className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 text-gray-900 rounded"
+										/>
+										<span className="text-gray-700">Attendee will attend</span>
+									</label>
+									<label className="flex items-center space-x-2">
+										<input
+											type="checkbox"
+											name={`${event.id}Guest`}
+											checked={
+												formData.eventAttendance[
+													`${event.id}Guest` as keyof typeof formData.eventAttendance
+												]
+											}
+											onChange={handleCheckbox}
+											className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 text-gray-900 rounded"
+										/>
+										<span className="text-gray-700">Guest will attend</span>
+									</label>
+								</div>
+							</div>
+						))}
+					</div>
         </div>
       </section>
 
@@ -638,9 +751,9 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="lucide lucide-utensils h-5 w-5 text-blue-600"
               aria-hidden="true"
             >
@@ -702,8 +815,8 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="lucide lucide-message-square h-5 w-5 text-blue-600"
               aria-hidden="true"
             >

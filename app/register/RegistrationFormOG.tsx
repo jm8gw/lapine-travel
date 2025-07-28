@@ -22,6 +22,7 @@ export default function RetreatRegistrationForm() {
     departureTime: '',
     departureAirport: '',
     roomType: '',
+    oceanView: '',
     checkInDate: '',
     checkOutDate: '',
     eventAttendance: {
