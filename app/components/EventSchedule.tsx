@@ -11,8 +11,8 @@ const events = [
       },
       {
         time: "7:30 PM",
-        title: "Dinner On Own",
-        location: "Hotel or Off Property",
+        title: "Welcome Dinner",
+        location: "Hotel",
       },
     ],
   },
@@ -25,19 +25,19 @@ const events = [
         location: "Hotel",
       },
       {
-        time: "9:30 AM - 6:00 PM",
+        time: "9:30 AM - 7:00 PM",
+        title: "Free Time",
+        location: "Hotel or Off Property",
+      },
+      {
+        time: "9:30 AM - 5:00 PM",
         title: "Business Meeting",
         location: "Meeting Room",
       },
       {
-        time: "12:30 PM",
-        title: "Lunch Buffet",
-        location: "Meeting Room",
-      },
-      {
-        time: "3:00 PM",
-        title: "Afternoon Break",
-        location: "Meeting Room",
+        time: "7:00 PM - 7:30 PM",
+        title: "Lobby for Transportation to Restaurant",
+        location: "Hotel Lobby",
       },
       {
         time: "7:30 PM",
@@ -56,8 +56,13 @@ const events = [
       },
       {
         time: "9:00 AM - 3:00 PM",
-        title: "Off-site Activity",
+        title: "Scavenger Hunt with Lunch",
         location: "Off Property",
+      },
+      {
+        time: "7:00 PM - 7:30 PM",
+        title: "Lobby for Transportation to Restaurant",
+        location: "Hotel Lobby",
       },
       {
         time: "7:30 PM",
