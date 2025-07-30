@@ -47,6 +47,7 @@ export default function RegistrationLookupModal({ open, onClose }: Props) {
     if (res.ok) {
       const json = await res.json();
       setPrefillData(json.data);
+      console.log("Lookup result:", json.data);
       setLookupState("found");
     } else {
       setPrefillData(null);

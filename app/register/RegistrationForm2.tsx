@@ -20,32 +20,47 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     arrivalAirline: initialData?.[6] || "",
     arrivalFlightNumber: initialData?.[7] || "",
     arrivalTime: initialData?.[8] || "",
-    departureDate: initialData?.[9] || "",
-    departureAirline: initialData?.[10] || "",
-    departureFlightNumber: initialData?.[11] || "",
-    departureTime: initialData?.[12] || "",
-    departureAirport: initialData?.[13] || "",
-    roomType: initialData?.[14] || "",
-    oceanView: initialData?.[15] || "",
-    checkInDate: initialData?.[16] || "",
-    checkOutDate: initialData?.[17] || "",
+    guestHasDifferentArrivalFlight: initialData?.[9] === "TRUE",
+    guestArrivalDate: initialData?.[10] || "",
+    guestArrivalAirline: initialData?.[11] || "",
+    guestArrivalFlightNumber: initialData?.[12] || "",
+    guestArrivalTime: initialData?.[13] || "",
+    departureDate: initialData?.[14] || "",
+    departureAirline: initialData?.[15] || "",
+    departureFlightNumber: initialData?.[16] || "",
+    departureTime: initialData?.[17] || "",
+    departureAirport: initialData?.[18] || "",
+    guestHasDifferentDepartureFlight: initialData?.[19] === "TRUE",
+    guestDepartureDate: initialData?.[20] || "",
+    guestDepartureAirline: initialData?.[21] || "",
+    guestDepartureFlightNumber: initialData?.[22] || "",
+    guestDepartureTime: initialData?.[23] || "",
+    guestDepartureAirport: initialData?.[24] || "",
+    roomType: initialData?.[25] || "",
+    oceanView: initialData?.[26] || "",
+    checkInDate: initialData?.[27] || "",
+    checkOutDate: initialData?.[28] || "",
     eventAttendance: {
+      thursdayDinnerAttendee:
+        initialData?.[29]?.includes("thursdayDinnerAttendee") || false,
+      thursdayDinnerGuest:
+        initialData?.[29]?.includes("thursdayDinnerGuest") || false,
       fridayDinnerAttendee:
-        initialData?.[18]?.includes("fridayDinnerAttendee") || false,
+        initialData?.[29]?.includes("fridayDinnerAttendee") || false,
       fridayDinnerGuest:
-        initialData?.[18]?.includes("fridayDinnerGuest") || false,
+        initialData?.[29]?.includes("fridayDinnerGuest") || false,
       saturdayScavengerAttendee:
-        initialData?.[18]?.includes("saturdayScavengerAttendee") || false,
+        initialData?.[29]?.includes("saturdayScavengerAttendee") || false,
       saturdayScavengerGuest:
-        initialData?.[18]?.includes("saturdayScavengerGuest") || false,
+        initialData?.[29]?.includes("saturdayScavengerGuest") || false,
       saturdayDinnerAttendee:
-        initialData?.[18]?.includes("saturdayDinnerAttendee") || false,
+        initialData?.[29]?.includes("saturdayDinnerAttendee") || false,
       saturdayDinnerGuest:
-        initialData?.[18]?.includes("saturdayDinnerGuest") || false,
+        initialData?.[29]?.includes("saturdayDinnerGuest") || false,
     },
-    foodAllergies: initialData?.[19] || "",
-    mobilityIssues: initialData?.[20] || "",
-    additionalNotes: initialData?.[21] || "",
+    foodAllergies: initialData?.[30] || "",
+    mobilityIssues: initialData?.[31] || "",
+    additionalNotes: initialData?.[32] || "",
     // Old ones commented out for reference
     // arrivalFlightNumber: "",
     // arrivalTime: "",
@@ -68,7 +83,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     // foodAllergies: "",
     // mobilityIssues: "",
     // additionalNotes: "",
-    token: initialData?.[22] || "", // Will be set later from URL or backend lookup
+    token: initialData?.[33] || "", // Will be set later from URL or backend lookup
   });
 
   //console.log("RegistrationForm2.tsx: formData initialized with:", formData);
@@ -81,6 +96,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
 
   // Depreciated
   useEffect(() => {
+		//console.log(formData.guestHasDifferentDepartureFlight);
     if (tokenFromUrl) {
       fetch(`/api/register/lookup?token=${tokenFromUrl}`)
         .then((res) => res.json())
@@ -93,13 +109,31 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     }
   }, [tokenFromUrl]);
 
+  // const handleChange = (
+  //   e: React.ChangeEvent<
+  //     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  //   >
+  // ) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({ ...prev, [name]: value }));
+  // };
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const target = e.target;
+    const name = target.name;
+
+    const value =
+      target instanceof HTMLInputElement && target.type === "checkbox"
+        ? target.checked
+        : target.value;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,6 +148,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+		//console.log("RegistrationForm2.tsx: handleSubmit called with formData:", formData);
     e.preventDefault();
     const response = await fetch("/api/register", {
       method: "POST",
@@ -142,24 +177,37 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
       arrivalAirline: row[6] || "",
       arrivalFlightNumber: row[7] || "",
       arrivalTime: row[8] || "",
-      departureDate: row[9] || "",
-      departureAirline: row[10] || "",
-      departureFlightNumber: row[11] || "",
-      departureTime: row[12] || "",
-      departureAirport: row[13] || "",
-      roomType: row[14] || "",
-      oceanView: row[15] || "",
-      checkInDate: row[16] || "",
-      checkOutDate: row[17] || "",
-      eventAttendance: parseEventAttendance(row[18] || ""),
-      foodAllergies: row[19] || "",
-      mobilityIssues: row[20] || "",
-      additionalNotes: row[21] || "",
-      token: row[22] || "", // Ensure token is included
+      guestHasDifferentArrivalFlight: row[9] === "TRUE",
+      guestArrivalDate: row[10] || "",
+      guestArrivalAirline: row[11] || "",
+      guestArrivalFlightNumber: row[12] || "",
+      guestArrivalTime: row[13] || "",
+      departureDate: row[14] || "",
+      departureAirline: row[15] || "",
+      departureFlightNumber: row[16] || "",
+      departureTime: row[17] || "",
+      departureAirport: row[18] || "",
+      guestHasDifferentDepartureFlight: row[19] === "TRUE",
+      guestDepartureDate: row[20] || "",
+      guestDepartureAirline: row[21] || "",
+      guestDepartureFlightNumber: row[22] || "",
+      guestDepartureTime: row[23] || "",
+      guestDepartureAirport: row[24] || "",
+      roomType: row[25] || "",
+      oceanView: row[26] || "",
+      checkInDate: row[27] || "",
+      checkOutDate: row[28] || "",
+      eventAttendance: parseEventAttendance(row[29] || ""),
+      foodAllergies: row[30] || "",
+      mobilityIssues: row[31] || "",
+      additionalNotes: row[32] || "",
+      token: row[33] || "", // Ensure token is included
     };
   }
 
   function parseEventAttendance(value: string): {
+    thursdayDinnerAttendee: boolean;
+    thursdayDinnerGuest: boolean;
     fridayDinnerAttendee: boolean;
     fridayDinnerGuest: boolean;
     saturdayScavengerAttendee: boolean;
@@ -168,6 +216,8 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     saturdayDinnerGuest: boolean;
   } {
     const keys = [
+      "thursdayDinnerAttendee",
+      "thursdayDinnerGuest",
       "fridayDinnerAttendee",
       "fridayDinnerGuest",
       "saturdayScavengerAttendee",
@@ -179,6 +229,8 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     const selected = value.split(",").map((v) => v.trim());
 
     return {
+      thursdayDinnerAttendee: selected.includes("thursdayDinnerAttendee"),
+      thursdayDinnerGuest: selected.includes("thursdayDinnerGuest"),
       fridayDinnerAttendee: selected.includes("fridayDinnerAttendee"),
       fridayDinnerGuest: selected.includes("fridayDinnerGuest"),
       saturdayScavengerAttendee: selected.includes("saturdayScavengerAttendee"),
@@ -446,7 +498,94 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                 />
               </div>
+              {/* Guest Arrival Checkbox */}
+              <div className="md:col-span-2">
+                <label className="inline-flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    name="guestHasDifferentArrivalFlight"
+                    checked={!!formData.guestHasDifferentArrivalFlight}
+                    onChange={handleChange}
+                    className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <span className="text-sm text-gray-700">
+                    My guest is arriving on a different flight
+                  </span>
+                </label>
+              </div>
             </div>
+            {/* Guest flight fields (conditionally rendered) */}
+            {formData.guestHasDifferentArrivalFlight && (
+              <div className="mt-6">
+                <h5 className="text-md font-medium text-gray-800 mb-4">
+                  Guest Arrival Flight Details
+                </h5>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      className="flex text-sm font-medium text-gray-700"
+                      htmlFor="guestArrivalDate"
+                    >
+                      Arrival Date
+                    </label>
+                    <input
+                      type="date"
+                      name="guestArrivalDate"
+                      value={formData.guestArrivalDate}
+                      onChange={handleChange}
+                      className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="flex text-sm font-medium text-gray-700"
+                      htmlFor="guestArrivalAirline"
+                    >
+                      Airline
+                    </label>
+                    <input
+                      type="text"
+                      name="guestArrivalAirline"
+                      placeholder="e.g., United, Southwest"
+                      value={formData.guestArrivalAirline}
+                      onChange={handleChange}
+                      className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placeholder-gray-400 text-gray-700"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="flex text-sm font-medium text-gray-700"
+                      htmlFor="guestArrivalFlightNumber"
+                    >
+                      Flight Number
+                    </label>
+                    <input
+                      type="text"
+                      name="guestArrivalFlightNumber"
+                      placeholder="e.g., UA4567"
+                      value={formData.guestArrivalFlightNumber}
+                      onChange={handleChange}
+                      className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placeholder-gray-400 text-gray-700"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="flex text-sm font-medium text-gray-700"
+                      htmlFor="guestArrivalTime"
+                    >
+                      Arrival Time
+                    </label>
+                    <input
+                      type="time"
+                      name="guestArrivalTime"
+                      value={formData.guestArrivalTime}
+                      onChange={handleChange}
+                      className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="bg-blue-50 p-6 rounded-lg">
             <h4 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
@@ -537,7 +676,110 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
                 />
               </div>
+              {/* Guest Departure Checkbox */}
+              <div className="md:col-span-2">
+                <label className="inline-flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    name="guestHasDifferentDepartureFlight"
+                    checked={!!formData.guestHasDifferentDepartureFlight}
+                    onChange={handleChange}
+                    className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <span className="text-sm text-gray-700">
+                    My guest is departing on a different flight
+                  </span>
+                </label>
+              </div>
             </div>
+            {/* Guest flight fields (conditionally rendered) */}
+            {formData.guestHasDifferentDepartureFlight && (
+              <div className="mt-6">
+                <h5 className="text-md font-medium text-gray-800 mb-4">
+                  Guest Departure Flight Details
+                </h5>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      className="flex text-sm font-medium text-gray-700"
+                      htmlFor="guestDepartureDate"
+                    >
+                      Departure Date
+                    </label>
+                    <input
+                      type="date"
+                      name="guestDepartureDate"
+                      value={formData.guestDepartureDate}
+                      onChange={handleChange}
+                      className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="flex text-sm font-medium text-gray-700"
+                      htmlFor="guestDepartureAirline"
+                    >
+                      Airline
+                    </label>
+                    <input
+                      type="text"
+                      name="guestDepartureAirline"
+                      placeholder="e.g., United, Southwest"
+                      value={formData.guestDepartureAirline}
+                      onChange={handleChange}
+                      className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placeholder-gray-400 text-gray-700"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="flex text-sm font-medium text-gray-700"
+                      htmlFor="guestDepartureFlightNumber"
+                    >
+                      Flight Number
+                    </label>
+                    <input
+                      type="text"
+                      name="guestDepartureFlightNumber"
+                      placeholder="e.g., UA4567"
+                      value={formData.guestDepartureFlightNumber}
+                      onChange={handleChange}
+                      className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placeholder-gray-400 text-gray-700"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="flex text-sm font-medium text-gray-700"
+                      htmlFor="guestDepartureTime"
+                    >
+                      Departure Time
+                    </label>
+                    <input
+                      type="time"
+                      name="guestDepartureTime"
+                      value={formData.guestDepartureTime}
+                      onChange={handleChange}
+                      className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
+                    />
+                  </div>
+									<div>
+										<label
+											data-slot="label"
+											className="flex text-sm font-medium text-gray-700"
+											htmlFor="guestDepartureAirport"
+										>
+											Departure Airport
+										</label>
+										<input
+											name="guestDepartureAirport"
+											placeholder="e.g., JFK, LAX, MIA"
+											value={formData.guestDepartureAirport}
+											onChange={handleChange}
+											className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
+										/>
+									</div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -616,8 +858,8 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 onChange={handleChange}
                 className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
               >
-                <option value="2 beds">No</option>
-                <option value="King">Yes</option>
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
               </select>
             </div>
             <div>
@@ -681,62 +923,69 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
               <path d="M3 10h18"></path>
             </svg>
             <h3 className="text-xl font-semibold text-gray-900">
-							Event Attendance
+              Event Attendance
             </h3>
           </div>
-					<div className="space-y-6">
-						{[
-							{
-								id: "fridayDinner",
-								label: "Friday Night Dinner",
-								bgColor: "bg-blue-50",
-							},
-							{
-								id: "saturdayScavenger",
-								label: "Saturday Scavenger Hunt with Lunch",
-								bgColor: "bg-green-50",
-							},
-							{
-								id: "saturdayDinner",
-								label: "Saturday Night Dinner",
-								bgColor: "bg-purple-50",
-							},
-						].map((event) => (
-							<div key={event.id} className={`${event.bgColor} p-4 rounded-md`}>
-								<h3 className="text-lg text-left text-gray-700 font-semibold mb-2">{event.label}</h3>
-								<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-									<label className="flex items-center space-x-2">
-										<input
-											type="checkbox"
-											name={`${event.id}Attendee`}
-											checked={
-												formData.eventAttendance[
-													`${event.id}Attendee` as keyof typeof formData.eventAttendance
-												]
-											}
-											onChange={handleCheckbox}
-											className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 text-gray-900 rounded"
-										/>
-										<span className="text-gray-700">Attendee will attend</span>
-									</label>
-									<label className="flex items-center space-x-2">
-										<input
-											type="checkbox"
-											name={`${event.id}Guest`}
-											checked={
-												formData.eventAttendance[
-													`${event.id}Guest` as keyof typeof formData.eventAttendance
-												]
-											}
-											onChange={handleCheckbox}
-											className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 text-gray-900 rounded"
-										/>
-										<span className="text-gray-700">Guest will attend</span>
-									</label>
-								</div>
-							</div>
-						))}
-					</div>
+          <div className="space-y-6">
+            {[
+              {
+                id: "thursdayDinner",
+                label: "Thursday Night Cocktails and Dinner",
+                bgColor: "bg-orange-50",
+              },
+              {
+                id: "fridayDinner",
+                label: "Friday Night Dinner",
+                bgColor: "bg-blue-50",
+              },
+              {
+                id: "saturdayScavenger",
+                label: "Saturday Scavenger Hunt with Lunch",
+                bgColor: "bg-green-50",
+              },
+              {
+                id: "saturdayDinner",
+                label: "Saturday Night Dinner",
+                bgColor: "bg-purple-50",
+              },
+            ].map((event) => (
+              <div key={event.id} className={`${event.bgColor} p-4 rounded-md`}>
+                <h3 className="text-lg text-left text-gray-700 font-semibold mb-2">
+                  {event.label}
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      name={`${event.id}Attendee`}
+                      checked={
+                        formData.eventAttendance[
+                          `${event.id}Attendee` as keyof typeof formData.eventAttendance
+                        ]
+                      }
+                      onChange={handleCheckbox}
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 text-gray-900 rounded"
+                    />
+                    <span className="text-gray-700">Attendee will attend</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      name={`${event.id}Guest`}
+                      checked={
+                        formData.eventAttendance[
+                          `${event.id}Guest` as keyof typeof formData.eventAttendance
+                        ]
+                      }
+                      onChange={handleCheckbox}
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 text-gray-900 rounded"
+                    />
+                    <span className="text-gray-700">Guest will attend</span>
+                  </label>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

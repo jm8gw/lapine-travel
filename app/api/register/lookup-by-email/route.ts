@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID!,
-      range: "Responses!A2:Z",
+      range: "Responses!A2:AJ",
     });
 
     const rows = response.data.values ?? [];
