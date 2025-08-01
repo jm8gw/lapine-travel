@@ -17,50 +17,50 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     //attendeeTshirtSize: initialData?.[5] || "",
     //guestTshirtSize: initialData?.[6] || "",
     arrivalDate: initialData?.[5] || "",
-    arrivalAirline: initialData?.[6] || "",
-    arrivalFlightNumber: initialData?.[7] || "",
-    arrivalTime: initialData?.[8] || "",
-    guestHasDifferentArrivalFlight: initialData?.[9] === "TRUE",
-    guestArrivalDate: initialData?.[10] || "",
-    guestArrivalAirline: initialData?.[11] || "",
-    guestArrivalFlightNumber: initialData?.[12] || "",
-    guestArrivalTime: initialData?.[13] || "",
-    departureDate: initialData?.[14] || "",
-    departureAirline: initialData?.[15] || "",
-    departureFlightNumber: initialData?.[16] || "",
-    departureTime: initialData?.[17] || "",
-    departureAirport: initialData?.[18] || "",
-    guestHasDifferentDepartureFlight: initialData?.[19] === "TRUE",
-    guestDepartureDate: initialData?.[20] || "",
-    guestDepartureAirline: initialData?.[21] || "",
-    guestDepartureFlightNumber: initialData?.[22] || "",
-    guestDepartureTime: initialData?.[23] || "",
-    guestDepartureAirport: initialData?.[24] || "",
-    roomType: initialData?.[25] || "",
-    oceanView: initialData?.[26] || "",
-    checkInDate: initialData?.[27] || "",
-    checkOutDate: initialData?.[28] || "",
+    //arrivalAirline: initialData?.[6] || "",
+    arrivalFlightNumber: initialData?.[6] || "",
+    arrivalTime: initialData?.[7] || "",
+    guestHasDifferentArrivalFlight: initialData?.[8] === "TRUE",
+    guestArrivalDate: initialData?.[9] || "",
+    //guestArrivalAirline: initialData?.[11] || "",
+    guestArrivalFlightNumber: initialData?.[10] || "",
+    guestArrivalTime: initialData?.[11] || "",
+    departureDate: initialData?.[12] || "",
+    //departureAirline: initialData?.[15] || "",
+    departureFlightNumber: initialData?.[13] || "",
+    departureTime: initialData?.[14] || "",
+    //departureAirport: initialData?.[15] || "",
+    guestHasDifferentDepartureFlight: initialData?.[15] === "TRUE",
+    guestDepartureDate: initialData?.[16] || "",
+    //guestDepartureAirline: initialData?.[21] || "",
+    guestDepartureFlightNumber: initialData?.[17] || "",
+    guestDepartureTime: initialData?.[18] || "",
+    //guestDepartureAirport: initialData?.[20] || "",
+    roomType: initialData?.[19] || "",
+    oceanView: initialData?.[20] || "",
+    checkInDate: initialData?.[21] || "",
+    checkOutDate: initialData?.[22] || "",
     eventAttendance: {
       thursdayDinnerAttendee:
-        initialData?.[29]?.includes("thursdayDinnerAttendee") || false,
+        initialData?.[23]?.includes("thursdayDinnerAttendee") || false,
       thursdayDinnerGuest:
-        initialData?.[29]?.includes("thursdayDinnerGuest") || false,
+        initialData?.[23]?.includes("thursdayDinnerGuest") || false,
       fridayDinnerAttendee:
-        initialData?.[29]?.includes("fridayDinnerAttendee") || false,
+        initialData?.[23]?.includes("fridayDinnerAttendee") || false,
       fridayDinnerGuest:
-        initialData?.[29]?.includes("fridayDinnerGuest") || false,
+        initialData?.[23]?.includes("fridayDinnerGuest") || false,
       saturdayScavengerAttendee:
-        initialData?.[29]?.includes("saturdayScavengerAttendee") || false,
+        initialData?.[23]?.includes("saturdayScavengerAttendee") || false,
       saturdayScavengerGuest:
-        initialData?.[29]?.includes("saturdayScavengerGuest") || false,
+        initialData?.[23]?.includes("saturdayScavengerGuest") || false,
       saturdayDinnerAttendee:
-        initialData?.[29]?.includes("saturdayDinnerAttendee") || false,
+        initialData?.[23]?.includes("saturdayDinnerAttendee") || false,
       saturdayDinnerGuest:
-        initialData?.[29]?.includes("saturdayDinnerGuest") || false,
+        initialData?.[23]?.includes("saturdayDinnerGuest") || false,
     },
-    foodAllergies: initialData?.[30] || "",
-    mobilityIssues: initialData?.[31] || "",
-    additionalNotes: initialData?.[32] || "",
+    foodAllergies: initialData?.[24] || "",
+    mobilityIssues: initialData?.[25] || "",
+    additionalNotes: initialData?.[26] || "",
     // Old ones commented out for reference
     // arrivalFlightNumber: "",
     // arrivalTime: "",
@@ -83,16 +83,17 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     // foodAllergies: "",
     // mobilityIssues: "",
     // additionalNotes: "",
-    token: initialData?.[33] || "", // Will be set later from URL or backend lookup
+    token: initialData?.[27] || "", // Will be set later from URL or backend lookup
   });
 
-  //console.log("RegistrationForm2.tsx: formData initialized with:", formData);
+  console.log("RegistrationForm2.tsx: formData initialized with:", formData);
   //   const searchParams = useSearchParams();
   //const tokenFromUrl = searchParams.get("token");
   const tokenFromUrl = null;
   //const [token, setToken] = useState<string | null>(tokenFromUrl);
   //   const emailFromUrl = searchParams.get("email");
   //   const [UrlEmail, setUrlEmail] = useState<string | null>(emailFromUrl);
+	const [loading, setLoading] = useState(false);
 
   // Depreciated
   useEffect(() => {
@@ -147,23 +148,27 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-		//console.log("RegistrationForm2.tsx: handleSubmit called with formData:", formData);
-    e.preventDefault();
-    const response = await fetch("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...formData,
-        //token, // must pass this or else the backend generates a new one
-      }),
-    });
-    const result = await response.json();
-    alert(
-      result.success ? "Registration submitted!" : `Error: ${result.error}`
-    );
-    window.location.reload();
-  };
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		setLoading(true);
+		try {
+			const response = await fetch("/api/register", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(formData),
+			});
+			const result = await response.json();
+			alert(
+				result.success ? "Registration submitted!" : `Error: ${result.error}`
+			);
+			window.location.reload();
+		} catch (err) {
+			console.error("Submit failed:", err);
+			alert("Something went wrong. Please try again.");
+		} finally {
+			setLoading(false);
+		}
+	};
 
   function mapRowToFormData(row: string[]) {
     return {
@@ -174,34 +179,34 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
       //attendeeTshirtSize: row[5] || "",
       //guestTshirtSize: row[6] || "",
       arrivalDate: row[5] || "",
-      arrivalAirline: row[6] || "",
-      arrivalFlightNumber: row[7] || "",
-      arrivalTime: row[8] || "",
-      guestHasDifferentArrivalFlight: row[9] === "TRUE",
-      guestArrivalDate: row[10] || "",
-      guestArrivalAirline: row[11] || "",
-      guestArrivalFlightNumber: row[12] || "",
-      guestArrivalTime: row[13] || "",
-      departureDate: row[14] || "",
-      departureAirline: row[15] || "",
-      departureFlightNumber: row[16] || "",
-      departureTime: row[17] || "",
-      departureAirport: row[18] || "",
-      guestHasDifferentDepartureFlight: row[19] === "TRUE",
-      guestDepartureDate: row[20] || "",
-      guestDepartureAirline: row[21] || "",
-      guestDepartureFlightNumber: row[22] || "",
-      guestDepartureTime: row[23] || "",
-      guestDepartureAirport: row[24] || "",
-      roomType: row[25] || "",
-      oceanView: row[26] || "",
-      checkInDate: row[27] || "",
-      checkOutDate: row[28] || "",
-      eventAttendance: parseEventAttendance(row[29] || ""),
-      foodAllergies: row[30] || "",
-      mobilityIssues: row[31] || "",
-      additionalNotes: row[32] || "",
-      token: row[33] || "", // Ensure token is included
+      //arrivalAirline: row[6] || "",
+      arrivalFlightNumber: row[6] || "",
+      arrivalTime: row[7] || "",
+      guestHasDifferentArrivalFlight: row[8] === "TRUE",
+      guestArrivalDate: row[9] || "",
+      //guestArrivalAirline: row[11] || "",
+      guestArrivalFlightNumber: row[10] || "",
+      guestArrivalTime: row[11] || "",
+      departureDate: row[12] || "",
+      //departureAirline: row[15] || "",
+      departureFlightNumber: row[13] || "",
+      departureTime: row[14] || "",
+      //departureAirport: row[15] || "",
+      guestHasDifferentDepartureFlight: row[15] === "TRUE",
+      guestDepartureDate: row[16] || "",
+      //guestDepartureAirline: row[21] || "",
+      guestDepartureFlightNumber: row[17] || "",
+      guestDepartureTime: row[18] || "",
+      //guestDepartureAirport: row[20] || "",
+      roomType: row[19] || "",
+      oceanView: row[20] || "",
+      checkInDate: row[21] || "",
+      checkOutDate: row[22] || "",
+      eventAttendance: parseEventAttendance(row[23] || ""),
+      foodAllergies: row[24] || "",
+      mobilityIssues: row[25] || "",
+      additionalNotes: row[26] || "",
+      token: row[27] || "", // Ensure token is included
     };
   }
 
@@ -239,6 +244,12 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
       saturdayDinnerGuest: selected.includes("saturdayDinnerGuest"),
     };
   }
+
+	function formatTimeValue(time: string): string {
+		const [hour, minute] = time.split(":").map((val) => val.padStart(2, "0"));
+		return `${hour}:${minute}`;
+	}
+	
 
   return (
     <form onSubmit={handleSubmit} className="py-16 px-4 sm:px-6 lg:px-8">
@@ -431,7 +442,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 ✈️ Arrival Flight
               </span>
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label
                   data-slot="label"
@@ -449,7 +460,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                 />
               </div>
-              <div>
+              {/* <div>
                 <label
                   data-slot="label"
                   className="flex text-sm font-medium text-gray-700"
@@ -464,7 +475,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   onChange={handleChange}
                   className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
                 />
-              </div>
+              </div> */}
               <div>
                 <label
                   data-slot="label"
@@ -493,13 +504,13 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   name="arrivalTime"
                   type="time"
                   placeholder="Arrival Time"
-                  value={formData.arrivalTime}
+                  value={formatTimeValue(formData.arrivalTime)}
                   onChange={handleChange}
                   className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                 />
               </div>
               {/* Guest Arrival Checkbox */}
-              <div className="md:col-span-2">
+              <div className="md:col-span-3">
                 <label className="inline-flex items-center space-x-2">
                   <input
                     type="checkbox"
@@ -520,7 +531,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 <h5 className="text-md font-medium text-gray-800 mb-4">
                   Guest Arrival Flight Details
                 </h5>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label
                       className="flex text-sm font-medium text-gray-700"
@@ -536,7 +547,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                       className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                     />
                   </div>
-                  <div>
+                  {/* <div>
                     <label
                       className="flex text-sm font-medium text-gray-700"
                       htmlFor="guestArrivalAirline"
@@ -551,7 +562,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                       onChange={handleChange}
                       className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placeholder-gray-400 text-gray-700"
                     />
-                  </div>
+                  </div> */}
                   <div>
                     <label
                       className="flex text-sm font-medium text-gray-700"
@@ -578,7 +589,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                     <input
                       type="time"
                       name="guestArrivalTime"
-                      value={formData.guestArrivalTime}
+                      value={formatTimeValue(formData.guestArrivalTime)}
                       onChange={handleChange}
                       className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                     />
@@ -593,7 +604,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 🛫 Departure Flight
               </span>
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label
                   data-slot="label"
@@ -611,7 +622,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                 />
               </div>
-              <div>
+              {/* <div>
                 <label
                   data-slot="label"
                   className="flex text-sm font-medium text-gray-700"
@@ -626,7 +637,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   onChange={handleChange}
                   className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
                 />
-              </div>
+              </div> */}
               <div>
                 <label
                   data-slot="label"
@@ -655,12 +666,12 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   name="departureTime"
                   type="time"
                   placeholder="Departure Time"
-                  value={formData.departureTime}
+                  value={formatTimeValue(formData.departureTime)}
                   onChange={handleChange}
                   className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                 />
               </div>
-              <div>
+              {/* <div>
                 <label
                   data-slot="label"
                   className="flex text-sm font-medium text-gray-700"
@@ -675,9 +686,9 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   onChange={handleChange}
                   className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
                 />
-              </div>
+              </div> */}
               {/* Guest Departure Checkbox */}
-              <div className="md:col-span-2">
+              <div className="md:col-span-3">
                 <label className="inline-flex items-center space-x-2">
                   <input
                     type="checkbox"
@@ -698,7 +709,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 <h5 className="text-md font-medium text-gray-800 mb-4">
                   Guest Departure Flight Details
                 </h5>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label
                       className="flex text-sm font-medium text-gray-700"
@@ -714,7 +725,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                       className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                     />
                   </div>
-                  <div>
+                  {/* <div>
                     <label
                       className="flex text-sm font-medium text-gray-700"
                       htmlFor="guestDepartureAirline"
@@ -729,7 +740,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                       onChange={handleChange}
                       className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placeholder-gray-400 text-gray-700"
                     />
-                  </div>
+                  </div> */}
                   <div>
                     <label
                       className="flex text-sm font-medium text-gray-700"
@@ -756,12 +767,12 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                     <input
                       type="time"
                       name="guestDepartureTime"
-                      value={formData.guestDepartureTime}
+                      value={formatTimeValue(formData.guestDepartureTime)}
                       onChange={handleChange}
                       className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                     />
                   </div>
-									<div>
+									{/* <div>
 										<label
 											data-slot="label"
 											className="flex text-sm font-medium text-gray-700"
@@ -776,7 +787,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
 											onChange={handleChange}
 											className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
 										/>
-									</div>
+									</div> */}
                 </div>
               </div>
             )}
@@ -812,9 +823,9 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
           </div>
           <p className="text-gray-700 mb-6 text-left text-sm">
             <li>
-              The Lapine Group will cover a standard hotel room at $329/night
+              The Lapine Group will cover a standard hotel room at $329/night, for Nov. 13th to 17th
             </li>
-            <li>For an Ocean View Room, you must pay $60/night</li>
+            <li>You will be charged $60/night if you select &quot;Yes&quot; for Ocean View</li>
             <li>
               If you would like to arrive earlier, or stay extra nights, you
               will be responsible for the cost
@@ -858,6 +869,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 onChange={handleChange}
                 className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none placehorder-gray-400 text-gray-700"
               >
+								<option value="">Select</option>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
               </select>
@@ -1094,12 +1106,13 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
         </div>
       </section>
 
-      <button
-        type="submit"
-        className="mt-4 w-full bg-gradient-to-r from-blue-600 to-green-600 text-white py-3 px-6 rounded-md text-lg font-semibold shadow hover:from-blue-700 hover:to-green-700 hover:scale-[1.02] transition-transform"
-      >
-        Submit
-      </button>
+			<button
+				type="submit"
+				className="mt-4 w-full bg-gradient-to-r from-blue-600 to-green-600 text-white py-3 px-6 rounded-md text-lg font-semibold shadow hover:from-blue-700 hover:to-green-700 hover:scale-[1.02] transition-transform disabled:opacity-60 disabled:cursor-not-allowed"
+				disabled={loading}
+			>
+				{loading ? "Submitting, one moment please..." : "Submit"}
+			</button>
     </form>
   );
 }

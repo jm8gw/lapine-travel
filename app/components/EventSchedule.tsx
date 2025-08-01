@@ -7,11 +7,13 @@ const events = [
       {
         time: "6:00 PM",
         title: "Welcome Cocktails",
+        subtitle: "",
         location: "Hotel",
       },
       {
         time: "7:30 PM",
         title: "Welcome Dinner",
+        subtitle: "",
         location: "Hotel",
       },
     ],
@@ -22,26 +24,31 @@ const events = [
       {
         time: "7:30 AM - 9:30 AM",
         title: "Breakfast",
+        subtitle: "",
         location: "Hotel",
       },
       {
         time: "9:30 AM - 7:00 PM",
-        title: "Free Time",
+        title: "Free Time For Guests",
+        subtitle: "",
         location: "Hotel or Off Property",
       },
       {
         time: "9:30 AM - 5:00 PM",
-        title: "Business Meeting",
+        title: "Mandatory Meeting for Lapineers",
+        subtitle: "",
         location: "Meeting Room",
       },
       {
         time: "7:00 PM - 7:30 PM",
         title: "Lobby for Transportation to Restaurant",
+        subtitle: "",
         location: "Hotel Lobby",
       },
       {
         time: "7:30 PM",
         title: "Off-Site Dinner",
+        subtitle: "",
         location: "Off Property",
       },
     ],
@@ -52,21 +59,25 @@ const events = [
       {
         time: "7:30 AM - 9:30 AM",
         title: "Breakfast",
+        subtitle: "",
         location: "Hotel",
       },
       {
         time: "9:00 AM - 3:00 PM",
         title: "Scavenger Hunt with Lunch",
+        subtitle: "Lapineers wear Psycho Bunny T-shirts",
         location: "Off Property",
       },
       {
         time: "7:00 PM - 7:30 PM",
         title: "Lobby for Transportation to Restaurant",
+        subtitle: "",
         location: "Hotel Lobby",
       },
       {
         time: "7:30 PM",
         title: "Off-Site Dinner",
+        subtitle: "",
         location: "Off Property",
       },
     ],
@@ -77,6 +88,7 @@ const events = [
       {
         time: "7:30 AM - 9:30 AM",
         title: "Farewell Breakfast",
+        subtitle: "",
         location: "Hotel",
       },
     ],
@@ -106,7 +118,7 @@ export default function EventSchedule() {
               </h3>
 
               <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-                {events.map(({ time, title, location }) => (
+                {events.map(({ time, title, subtitle, location }) => (
                   <div
                     key={title + time}
                     className="bg-white rounded-xl p-3 shadow-md hover:shadow-lg transition-shadow duration-300"
@@ -117,9 +129,14 @@ export default function EventSchedule() {
                         {time}
                       </div>
                     </div>
-                    <h4 className="text-lg font-bold text-gray-900 mb-2">
+                    <h4 className="text-lg font-bold text-gray-900 ">
                       {title}
                     </h4>
+                    <div className="space-y-1 text-xs mb-2">
+                      <div className="flex items-center text-gray-500">
+                        {subtitle}
+                      </div>
+                    </div>
                     <div className="space-y-1 text-xs">
                       <div className="flex items-center text-gray-500">
                         <MapPin className="w-4 h-4 mr-2" />
