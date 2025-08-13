@@ -108,6 +108,11 @@ export async function POST(req: NextRequest) {
         return Response.json({ error: "Token not found" }, { status: 404 });
       }
 
+      if (rowIndex + 2 === 1) {
+        console.warn("Refusing to update header row.");
+        return Response.json({ error: "Cannot update header row" }, { status: 400 });
+      }
+
       await sheets.spreadsheets.values.update({
         spreadsheetId,
         range: `Responses!A${rowIndex + 2}`, // offset for header row

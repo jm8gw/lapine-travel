@@ -245,10 +245,32 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     };
   }
 
-	function formatTimeValue(time: string): string {
-		const [hour, minute] = time.split(":").map((val) => val.padStart(2, "0"));
-		return `${hour}:${minute}`;
-	}
+  function formatTimeValue(time: string): string {
+    if (!time) return "";
+  
+    // Handle 12-hour format with AM/PM
+    if (time.includes("AM") || time.includes("PM")) {
+      const [t, modifier] = time.trim().split(" ");
+      let [hours, minutes] = t.split(":").map(Number);
+  
+      if (modifier === "PM" && hours < 12) hours += 12;
+      if (modifier === "AM" && hours === 12) hours = 0;
+  
+      return `${hours.toString().padStart(2, "0")}:${minutes
+        .toString()
+        .padStart(2, "0")}`;
+    }
+  
+    // Already in 24-hour format
+    const [hour, minute] = time.split(":").map((val) => val.padStart(2, "0"));
+    return `${hour}:${minute}`;
+  }
+
+  const toDateInputFormat = (dateStr: string) => {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return "";
+    return date.toISOString().split("T")[0]; // "2025-08-13"
+  };
 	
 
   return (
@@ -455,7 +477,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   name="arrivalDate"
                   type="date"
                   placeholder="Arrival Date"
-                  value={formData.arrivalDate}
+                  value={toDateInputFormat(formData.arrivalDate)}
                   onChange={handleChange}
                   className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                 />
@@ -542,7 +564,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                     <input
                       type="date"
                       name="guestArrivalDate"
-                      value={formData.guestArrivalDate}
+                      value={toDateInputFormat(formData.guestArrivalDate)}
                       onChange={handleChange}
                       className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                     />
@@ -617,7 +639,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                   name="departureDate"
                   type="date"
                   placeholder="Departure Date"
-                  value={formData.departureDate}
+                  value={toDateInputFormat(formData.departureDate)}
                   onChange={handleChange}
                   className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                 />
@@ -720,7 +742,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                     <input
                       type="date"
                       name="guestDepartureDate"
-                      value={formData.guestDepartureDate}
+                      value={toDateInputFormat(formData.guestDepartureDate)}
                       onChange={handleChange}
                       className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
                     />
@@ -823,9 +845,13 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
           </div>
           <p className="text-gray-700 mb-6 text-left text-sm">
             <li>
-              The Lapine Group will cover a standard hotel room at $329/night, for Nov. 13th to 17th
+              The Lapine Group will cover a standard hotel room at <strong>$329/night, for Nov. 13th to 17th</strong>
             </li>
-            <li>You will be charged $60/night if you select &quot;Yes&quot; for Ocean View</li>
+            <li>
+              <strong>
+                You will be charged an additional $60/night if you select &quot;Yes&quot; for Ocean View
+              </strong>
+            </li>
             <li>
               If you would like to arrive earlier, or stay extra nights, you
               will be responsible for the cost
@@ -871,7 +897,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
               >
 								<option value="">Select</option>
                 <option value="No">No</option>
-                <option value="Yes">Yes</option>
+                <option value="Yes">Yes (+$60)</option>
               </select>
             </div>
             <div>

@@ -21,7 +21,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Links */}
+          {/* Desktop Links
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               <a href="#home" className="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
@@ -37,15 +37,15 @@ export default function Navbar() {
                 Contact
               </a>
             </div>
-          </div>
+          </div> */}
 
           {/* CTA Button */}
           <div className="flex items-center">
             <Link
-              href="https://lapine-travel.vercel.app/"
+              href="mailto:heidi@fontainetravel.com"
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
             >
-              Register for the Meeting
+              Contact Us
             </Link>
           </div>
         </div>
