@@ -251,7 +251,8 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     // Handle 12-hour format with AM/PM
     if (time.includes("AM") || time.includes("PM")) {
       const [t, modifier] = time.trim().split(" ");
-      let [hours, minutes] = t.split(":").map(Number);
+      const [rawHours, minutes] = t.split(":").map(Number);
+      let hours = rawHours;
   
       if (modifier === "PM" && hours < 12) hours += 12;
       if (modifier === "AM" && hours === 12) hours = 0;
