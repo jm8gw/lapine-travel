@@ -245,7 +245,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     };
   }
 
-  function formatTimeValue(time: string): string {
+  const formatTimeValue = (time: string): string => {
     if (!time) return "";
   
     // Handle 12-hour format with AM/PM
