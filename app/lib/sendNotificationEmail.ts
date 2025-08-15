@@ -63,7 +63,7 @@ export async function sendNotificationEmail({
     from: `"Lapine PR Registration Site" <${process.env.NOTIF_EMAIL_USER!}>`,
     to: [
         process.env.NOTIF_EMAIL_TO!,
-        //"secondperson@example.com",
+        process.env.NOTIF_EMAIL_TO_OTHER!,
       ],
     subject:
         type === "new" ? `New Lapine PR Registration from ${formData.attendeeName}` : `Updated Lapine PR Registration for ${formData.attendeeName}`,
