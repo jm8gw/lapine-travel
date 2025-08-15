@@ -57,11 +57,14 @@ export async function sendNotificationEmail({
   });
 
   const heading =
-    type === "new" ? "📝 New Registration Submitted" : "🔄 Registration Updated";
+    type === "new" ? "Hello! Someone submitted a new registration on the Lapine PR site:" : "Hello! Someone updated their registration on the Lapine PR site:";
 
   const message = {
     from: `"Lapine PR Registration Site" <${process.env.NOTIF_EMAIL_USER!}>`,
-    to: process.env.NOTIF_EMAIL_TO!,
+    to: [
+        process.env.NOTIF_EMAIL_TO!,
+        //"secondperson@example.com",
+      ],
     subject:
         type === "new" ? `New Lapine PR Registration from ${formData.attendeeName}` : `Updated Lapine PR Registration for ${formData.attendeeName}`,
     text: `
@@ -91,9 +94,9 @@ export async function sendNotificationEmail({
         <li><strong>Name:</strong> ${formData.attendeeName}</li>
         <li><strong>Email:</strong> ${formData.email}</li>
         <li><strong>Phone:</strong> ${formData.phone}</li>
-        <li><strong>Guest Name:</strong> ${formData.guestName} || "N/A"</li>
-        <li><strong>Arrival Date:</strong> ${formData.arrivalDate} || "None"</li>
-        <li><strong>Departure Date:</strong> ${formData.departureDate} || "None"</li>
+        <li><strong>Guest Name:</strong> ${formData.guestName|| "N/A"} </li>
+        <li><strong>Arrival Date:</strong> ${formData.arrivalDate  || "None"}</li>
+        <li><strong>Departure Date:</strong> ${formData.departureDate  || "None"}</li>
         <li><strong>Dietary Restrictions:</strong> ${
             formData.foodAllergies || "None"
         }</li>
@@ -104,7 +107,13 @@ export async function sendNotificationEmail({
             formData.additionalNotes || "None"
         }</li>
         </ul>
-        <p>Check the Google Sheet for full registration details.</p>
+        <p>Check the Google Sheet for full registration details: </p>
+        <p>
+            <a href="https://docs.google.com/spreadsheets/d/1HDQztcmneiuqMZw6UVEAjH0vhub9LhtdoBL3UZF5YF0/edit?usp=sharing" target="_blank">
+                Lapine PR Retreat Registrations
+            </a>
+        </p>
+        <p>Thank you! 🏖️</p>
     `,
   };
 
