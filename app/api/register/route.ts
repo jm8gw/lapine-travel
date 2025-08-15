@@ -1,5 +1,6 @@
 import { google } from "googleapis";
 import { NextRequest } from "next/server";
+import { sendNotificationEmail } from "../../lib/sendNotificationEmail";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -122,6 +123,9 @@ export async function POST(req: NextRequest) {
         }
       });
 
+      // Send notification email
+      await sendNotificationEmail({ formData: body, type: "updated"});
+
       return Response.json({ success: true, updated: true });
     } else {
       // Append new row
@@ -133,6 +137,9 @@ export async function POST(req: NextRequest) {
           values: [rowValues]
         }
       });
+
+      // Send notification email
+      await sendNotificationEmail({ formData: body, type: "new" });
 
       return Response.json({ success: true, token: rowValues[rowValues.length - 1] });
     }
