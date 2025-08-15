@@ -39,7 +39,7 @@ export default function Navbar() {
             </div>
           </div> */}
 
-          {/* CTA Button */}
+          {/* CTA Button
           <div className="flex items-center">
             <Link
               href="mailto:heidi@fontainetravel.com"
@@ -47,7 +47,7 @@ export default function Navbar() {
             >
               Contact Us
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>

@@ -68,7 +68,7 @@ export default function RegistrationLookupModal({ open, onClose }: Props) {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder="Enter the email you used to register"
               required
               className="w-full border px-4 py-2 rounded-md text-gray-600"
             />
