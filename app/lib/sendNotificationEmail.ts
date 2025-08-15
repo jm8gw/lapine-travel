@@ -1,10 +1,49 @@
 import nodemailer from "nodemailer";
 
+// types/RegistrationFormData.ts
+export interface RegistrationFormData {
+    attendeeName: string;
+    guestName: string;
+    email: string;
+    phone: string;
+    //attendeeTshirtSize: string;
+    //guestTshirtSize: string;
+    arrivalDate: string;
+    //arrivalAirline: string;
+    arrivalFlightNumber: string;
+    arrivalTime: string;
+    departureDate: string;
+    //departureAirline: string;
+    departureFlightNumber: string;
+    departureTime: string;
+    //departureAirport: string;
+    roomType: string;
+    oceanView: string;
+    checkInDate: string;
+    checkOutDate: string;
+    eventAttendance: Record<string, boolean>;
+    foodAllergies: string;
+    mobilityIssues: string;
+    additionalNotes: string;
+    token: string;
+    guestHasDifferentArrivalFlight?: boolean;
+    guestArrivalDate?: string;
+    guestArrivalAirline?: string;
+    guestArrivalFlightNumber?: string;
+    guestArrivalTime?: string;
+    guestHasDifferentDepartureFlight?: boolean;
+    guestDepartureDate?: string;
+    //guestDepartureAirline?: string;
+    guestDepartureFlightNumber?: string;
+    guestDepartureTime?: string;
+  } 
+
+
 export async function sendNotificationEmail({
     formData,
     type,
   }: {
-    formData: Record<string, any>;
+    formData: RegistrationFormData;
     type: "new" | "updated";
   }) {
   const transporter = nodemailer.createTransport({
@@ -52,11 +91,17 @@ export async function sendNotificationEmail({
         <li><strong>Name:</strong> ${formData.attendeeName}</li>
         <li><strong>Email:</strong> ${formData.email}</li>
         <li><strong>Phone:</strong> ${formData.phone}</li>
-        <li><strong>Guest Name:</strong> ${formData.guestName}</li>
-        <li><strong>Arrival Date:</strong> ${formData.arrivalDate}</li>
-        <li><strong>Departure Date:</strong> ${formData.departureDate}</li>
-        <li><strong>Special Requirements:</strong> ${
-            formData.specialRequirements || "None"
+        <li><strong>Guest Name:</strong> ${formData.guestName} || "N/A"</li>
+        <li><strong>Arrival Date:</strong> ${formData.arrivalDate} || "None"</li>
+        <li><strong>Departure Date:</strong> ${formData.departureDate} || "None"</li>
+        <li><strong>Dietary Restrictions:</strong> ${
+            formData.foodAllergies || "None"
+        }</li>
+        <li><strong>Accessibility Needs:</strong> ${
+            formData.mobilityIssues || "None"
+        }</li>
+        <li><strong>Additional Notes:</strong> ${
+            formData.additionalNotes || "None"
         }</li>
         </ul>
         <p>Check the Google Sheet for full registration details.</p>
