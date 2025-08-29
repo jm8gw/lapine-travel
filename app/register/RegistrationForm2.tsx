@@ -40,27 +40,45 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     oceanView: initialData?.[20] || "",
     checkInDate: initialData?.[21] || "",
     checkOutDate: initialData?.[22] || "",
+    // eventAttendance: {
+    //   thursdayDinnerAttendee:
+    //     initialData?.[23]?.includes("thursdayDinnerAttendee") || false,
+    //   thursdayDinnerGuest:
+    //     initialData?.[23]?.includes("thursdayDinnerGuest") || false,
+    //   fridayDinnerAttendee:
+    //     initialData?.[23]?.includes("fridayDinnerAttendee") || false,
+    //   fridayDinnerGuest:
+    //     initialData?.[23]?.includes("fridayDinnerGuest") || false,
+    //   saturdayScavengerAttendee:
+    //     initialData?.[23]?.includes("saturdayScavengerAttendee") || false,
+    //   saturdayScavengerGuest:
+    //     initialData?.[23]?.includes("saturdayScavengerGuest") || false,
+    //   saturdayDinnerAttendee:
+    //     initialData?.[23]?.includes("saturdayDinnerAttendee") || false,
+    //   saturdayDinnerGuest:
+    //     initialData?.[23]?.includes("saturdayDinnerGuest") || false,
+    // },
     eventAttendance: {
-      thursdayDinnerAttendee:
-        initialData?.[23]?.includes("thursdayDinnerAttendee") || false,
-      thursdayDinnerGuest:
-        initialData?.[23]?.includes("thursdayDinnerGuest") || false,
-      fridayDinnerAttendee:
-        initialData?.[23]?.includes("fridayDinnerAttendee") || false,
-      fridayDinnerGuest:
-        initialData?.[23]?.includes("fridayDinnerGuest") || false,
-      saturdayScavengerAttendee:
-        initialData?.[23]?.includes("saturdayScavengerAttendee") || false,
-      saturdayScavengerGuest:
-        initialData?.[23]?.includes("saturdayScavengerGuest") || false,
-      saturdayDinnerAttendee:
-        initialData?.[23]?.includes("saturdayDinnerAttendee") || false,
-      saturdayDinnerGuest:
-        initialData?.[23]?.includes("saturdayDinnerGuest") || false,
+      thursdayDinnerAttendee: initialData?.[23] || "",
+      thursdayDinnerGuest: initialData?.[24] || "",
+      fridayDinnerAttendee: initialData?.[25] || "",
+      fridayDinnerGuest: initialData?.[26] || "",
+      saturdayScavengerAttendee: initialData?.[27] || "",
+      saturdayScavengerGuest: initialData?.[28] || "",
+      saturdayDinnerAttendee: initialData?.[29] || "",
+      saturdayDinnerGuest: initialData?.[30] || "",
     },
-    foodAllergies: initialData?.[24] || "",
-    mobilityIssues: initialData?.[25] || "",
-    additionalNotes: initialData?.[26] || "",
+    // thursdayDinnerAttendee: initialData?.[23] || "",
+    // thursdayDinnerGuest: initialData?.[24] || "",
+    // fridayDinnerAttendee: initialData?.[25] || "",
+    // fridayDinnerGuest: initialData?.[26] || "",
+    // saturdayScavengerAttendee: initialData?.[27] || "",
+    // saturdayScavengerGuest: initialData?.[28] || "",
+    // saturdayDinnerAttendee: initialData?.[29] || "",
+    // saturdayDinnerGuest: initialData?.[30] || "",
+    foodAllergies: initialData?.[31] || "",
+    mobilityIssues: initialData?.[32] || "",
+    additionalNotes: initialData?.[33] || "",
     // Old ones commented out for reference
     // arrivalFlightNumber: "",
     // arrivalTime: "",
@@ -83,10 +101,10 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
     // foodAllergies: "",
     // mobilityIssues: "",
     // additionalNotes: "",
-    token: initialData?.[27] || "", // Will be set later from URL or backend lookup
+    token: initialData?.[34] || "", // Will be set later from URL or backend lookup
   });
 
-  console.log("RegistrationForm2.tsx: formData initialized with:", formData);
+  // console.log("RegistrationForm2.tsx: formData initialized with:", formData);
   //   const searchParams = useSearchParams();
   //const tokenFromUrl = searchParams.get("token");
   const tokenFromUrl = null;
@@ -202,14 +220,25 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
       oceanView: row[20] || "",
       checkInDate: row[21] || "",
       checkOutDate: row[22] || "",
-      eventAttendance: parseEventAttendance(row[23] || ""),
-      foodAllergies: row[24] || "",
-      mobilityIssues: row[25] || "",
-      additionalNotes: row[26] || "",
-      token: row[27] || "", // Ensure token is included
+      //eventAttendance: parseEventAttendance(row[23] || ""),
+      eventAttendance: {
+        thursdayDinnerAttendee: row[23] || "",
+        thursdayDinnerGuest: row[24] || "",
+        fridayDinnerAttendee: row[25] || "",
+        fridayDinnerGuest: row[26] || "",
+        saturdayScavengerAttendee: row[27] || "",
+        saturdayScavengerGuest: row[28] || "",
+        saturdayDinnerAttendee: row[29] || "",
+        saturdayDinnerGuest: row[30] || "",
+      },
+      foodAllergies: row[31] || "",
+      mobilityIssues: row[32] || "",
+      additionalNotes: row[33] || "",
+      token: row[34] || "", // Ensure token is included
     };
   }
 
+  // DEPRECIATED
   function parseEventAttendance(value: string): {
     thursdayDinnerAttendee: boolean;
     thursdayDinnerGuest: boolean;
@@ -913,7 +942,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 name="checkInDate"
                 type="date"
                 placeholder="mm/dd/yyyy"
-                value={formData.checkInDate}
+                value={toDateInputFormat(formData.checkInDate)}
                 onChange={handleChange}
                 className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
               />
@@ -930,7 +959,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                 name="checkOutDate"
                 type="date"
                 placeholder="mm/dd/yyyy"
-                value={formData.checkOutDate}
+                value={toDateInputFormat(formData.checkOutDate)}
                 onChange={handleChange}
                 className="w-full h-9 px-3 py-1 rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 outline-none text-gray-700"
               />
@@ -998,7 +1027,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                       type="checkbox"
                       name={`${event.id}Attendee`}
                       checked={
-                        formData.eventAttendance[
+                        !!formData.eventAttendance[
                           `${event.id}Attendee` as keyof typeof formData.eventAttendance
                         ]
                       }
@@ -1012,7 +1041,7 @@ export default function RegistrationForm({ initialData, onClose }: Props) {
                       type="checkbox"
                       name={`${event.id}Guest`}
                       checked={
-                        formData.eventAttendance[
+                        !!formData.eventAttendance[
                           `${event.id}Guest` as keyof typeof formData.eventAttendance
                         ]
                       }

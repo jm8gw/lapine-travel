@@ -37,6 +37,14 @@ export async function POST(req: NextRequest) {
     checkInDate,
     checkOutDate,
     eventAttendance,
+    // thursdayDinnerAttendee, 
+    // thursdayDinnerGuest, 
+    // fridayDinnerAttendee, 
+    // fridayDinnerGuest, 
+    // saturdayScavengerAttendee, 
+    // saturdayScavengerGuest, 
+    // saturdayDinnerAttendee, 
+    // saturdayDinnerGuest,
     foodAllergies,
     mobilityIssues,
     additionalNotes,
@@ -83,7 +91,16 @@ export async function POST(req: NextRequest) {
     oceanView,
     checkInDate,
     checkOutDate,
-    serializeEvents(eventAttendance),
+    //serializeEvents(eventAttendance),
+    // thursdayDinnerAttendee,
+    // thursdayDinnerGuest,
+    // fridayDinnerAttendee,
+    // fridayDinnerGuest,
+    // saturdayScavengerAttendee,
+    // saturdayScavengerGuest,
+    // saturdayDinnerAttendee,
+    // saturdayDinnerGuest,
+    ...eventAttendanceKeys.map(key => eventAttendance[key] ? "X" : ""),
     foodAllergies,
     mobilityIssues,
     additionalNotes,
@@ -97,12 +114,12 @@ export async function POST(req: NextRequest) {
       // Update existing row
       const sheetData = await sheets.spreadsheets.values.get({
         spreadsheetId,
-        range: "Responses!A2:AJ"
+        range: "Responses!A2:AR" // Adjust range as needed
       });
 
       const rows = sheetData.data.values ?? [];
       console.log("Looking for token:", providedToken);
-      console.log("Fetched rows:", JSON.stringify(rows));
+      //console.log("Fetched rows:", JSON.stringify(rows));
       const rowIndex = rows.findIndex(row => row[row.length - 1]?.trim() === providedToken.trim());
 
       if (rowIndex === -1) {
@@ -124,7 +141,12 @@ export async function POST(req: NextRequest) {
       });
 
       // Send notification email
-      await sendNotificationEmail({ formData: body, type: "updated"});
+      try {
+        await sendNotificationEmail({ formData: body, type: "updated" });
+      }
+      catch {
+        console.error("Failed to send notification email");
+      }
 
       return Response.json({ success: true, updated: true });
     } else {
@@ -138,8 +160,14 @@ export async function POST(req: NextRequest) {
         }
       });
 
+      console.log("Appended new row with value:", rowValues[rowValues.length - 1]);
       // Send notification email
-      await sendNotificationEmail({ formData: body, type: "new" });
+      try {
+        await sendNotificationEmail({ formData: body, type: "new" });
+      }
+      catch {
+        console.error("Failed to send notification email");
+      }
 
       return Response.json({ success: true, token: rowValues[rowValues.length - 1] });
     }
@@ -148,6 +176,17 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: "Failed to write to sheet" }, { status: 500 });
   }
 }
+
+const eventAttendanceKeys = [
+  "thursdayDinnerAttendee", 
+  "thursdayDinnerGuest", 
+  "fridayDinnerAttendee", 
+  "fridayDinnerGuest", 
+  "saturdayScavengerAttendee", 
+  "saturdayScavengerGuest", 
+  "saturdayDinnerAttendee", 
+  "saturdayDinnerGuest"
+];
 
 function serializeEvents(events: Record<string, boolean>): string {
   return Object.entries(events)

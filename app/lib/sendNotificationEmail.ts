@@ -21,7 +21,15 @@ export interface RegistrationFormData {
     oceanView: string;
     checkInDate: string;
     checkOutDate: string;
-    eventAttendance: Record<string, boolean>;
+    //eventAttendance: Record<string, boolean>;
+    thursdayDinnerAttendee: string;
+    thursdayDinnerGuest: string;
+    fridayDinnerAttendee: string;
+    fridayDinnerGuest: string;
+    saturdayScavengerAttendee: string;
+    saturdayScavengerGuest: string;
+    saturdayDinnerAttendee: string;
+    saturdayDinnerGuest: string;
     foodAllergies: string;
     mobilityIssues: string;
     additionalNotes: string;
