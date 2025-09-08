@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
     // saturdayScavengerGuest,
     // saturdayDinnerAttendee,
     // saturdayDinnerGuest,
-    ...eventAttendanceKeys.map(key => eventAttendance[key] ? "X" : ""),
+    ...eventAttendanceKeys.map(key => eventAttendance[key] ? "1" : ""),
     foodAllergies,
     mobilityIssues,
     additionalNotes,
