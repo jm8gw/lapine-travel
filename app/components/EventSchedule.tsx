@@ -8,13 +8,15 @@ const events = [
         time: "6:00 PM",
         title: "Welcome Cocktails",
         subtitle: "",
-        location: "Hotel",
+        location: "The Royal Sonesta San Juan",
+        link: "https://sanjuanroyal.sonesta.com/",
       },
       {
         time: "7:30 PM",
         title: "Welcome Dinner",
         subtitle: "",
-        location: "Hotel",
+        location: "The Royal Sonesta San Juan",
+        link: "https://sanjuanroyal.sonesta.com/",
       },
     ],
   },
@@ -25,31 +27,36 @@ const events = [
         time: "7:30 AM - 9:30 AM",
         title: "Breakfast",
         subtitle: "",
-        location: "Hotel",
+        location: "The Royal Sonesta San Juan",
+        link: "https://sanjuanroyal.sonesta.com/",
       },
       {
         time: "9:30 AM - 7:00 PM",
         title: "Free Time For Guests",
         subtitle: "",
-        location: "Hotel or Off Property",
+        location: "Wherever Your Hearts Desire!",
+        link: "",
       },
       {
         time: "9:30 AM - 5:00 PM",
         title: "Mandatory Meeting for Lapineers",
         subtitle: "",
         location: "Meeting Room",
+        link: "",
       },
       {
         time: "7:00 PM - 7:30 PM",
         title: "Lobby for Transportation to Restaurant",
         subtitle: "",
         location: "Hotel Lobby",
+        link: "",
       },
       {
         time: "7:30 PM",
-        title: "Off-Site Dinner",
+        title: "Dinner at La Casona",
         subtitle: "",
-        location: "Off Property",
+        location: "La Casona",
+        link: "https://restaurantelacasonapr.com/",
       },
     ],
   },
@@ -60,25 +67,29 @@ const events = [
         time: "7:30 AM - 9:30 AM",
         title: "Breakfast",
         subtitle: "",
-        location: "Hotel",
+        location: "The Royal Sonesta San Juan",
+        link: "https://sanjuanroyal.sonesta.com/",
       },
       {
         time: "9:00 AM - 3:00 PM",
-        title: "Scavenger Hunt with Lunch",
+        title: "Competition for All!",
         subtitle: "Lapineers wear Psycho Bunny T-shirts",
-        location: "Off Property",
+        location: "Rainforest then Tropical Lagoon (Gov't shutdown permitting)",
+        link: "",
       },
       {
         time: "7:00 PM - 7:30 PM",
         title: "Lobby for Transportation to Restaurant",
         subtitle: "",
         location: "Hotel Lobby",
+        link: "",
       },
       {
         time: "7:30 PM",
-        title: "Off-Site Dinner",
+        title: "Dinner at Santaella",
         subtitle: "",
-        location: "Off Property",
+        location: "Santaella, Puerto Rican Cuisine",
+        link: "https://www.josesantaella.com/",
       },
     ],
   },
@@ -89,7 +100,8 @@ const events = [
         time: "7:30 AM - 9:30 AM",
         title: "Farewell Breakfast",
         subtitle: "",
-        location: "Hotel",
+        location: "The Royal Sonesta San Juan",
+        link: "https://sanjuanroyal.sonesta.com/",
       },
     ],
   },
@@ -118,7 +130,7 @@ export default function EventSchedule() {
               </h3>
 
               <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-                {events.map(({ time, title, subtitle, location }) => (
+                {events.map(({ time, title, subtitle, location, link }) => (
                   <div
                     key={title + time}
                     className="bg-white rounded-xl p-3 shadow-md hover:shadow-lg transition-shadow duration-300"
@@ -140,7 +152,11 @@ export default function EventSchedule() {
                     <div className="space-y-1 text-xs">
                       <div className="flex items-center text-gray-500">
                         <MapPin className="w-4 h-4 mr-2" />
-                        {location}
+                        {link ? (
+                          <a href={link}>{location}</a>
+                        ) : (
+                          <span>{location}</span>
+                        )}
                       </div>
                     </div>
                   </div>
