@@ -99,7 +99,7 @@ const events = [
       {
         time: "7:30 AM - 9:30 AM",
         title: "Farewell Breakfast",
-        subtitle: "Thanks for coming!",
+        subtitle: "Thanks for coming!!",
         location: "The Royal Sonesta San Juan",
         link: "https://sanjuanroyal.sonesta.com/",
       },
